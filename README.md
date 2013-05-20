@@ -1,7 +1,7 @@
 NumericInput
 ==============
 
-jQuery plug-in which sets an html input to only allow numbers.
+jQuery plug-in which sets an (input) element to only allow numbers.
 
 
 Usage

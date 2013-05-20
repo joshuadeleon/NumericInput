@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////
 //	Author: Joshua De Leon
-//	File: numericTexbox.js
-//	Description: Allows only numeric input in element.
+//	File: numericInput.js
+//	Description: Allows only numeric input in an element.
 //	
 //	If you happen upon this code, enjoy it, learn from it, and 
 //	if possible please credit me: www.transtatic.com
@@ -18,7 +18,7 @@
 	// Plugin definition
 	//	allowFloat: (boolean) Allows floating point (real) numbers. If set to false only integers will be allowed. Default: false.
 	//	allowNegative: (boolean) Allows negative values. If set to false only positive number input will be allowed. Default: false.
- 	$.fn.numericTextbox = function( options ) { 
+ 	$.fn.numericInput = function( options ) { 
 		var settings = $.extend( {}, defaults, options ); 
 		var allowFloat = settings.allowFloat;
 		var allowNegative = settings.allowNegative;
