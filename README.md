@@ -14,7 +14,7 @@ allowNegative: (boolean) Allows negative numbers to be entered. Default: false.
 ### Usage ###
 
 Given the following input element
-    <input id="elementID" type="text" />
+    `<input id="elementID" type="text" />`
 
 To create an input element which only accepts positive integers simple use the .numericInput()
 function.
