@@ -1,17 +1,15 @@
 {
-	"name": "NumericInput",
-	"title": "NumericInput",
+	"name": "numericInput",
+	"title": "Numeric Input plug-in for jQuery",
 	"description": "A simple jQuery plug-in which sets an (input) element to only allow numbers.",
 	"keywords": [
 		"numeric",
-		"numeric input",
-		"numeric fields",
-		"number fields",
-		"number input",
-		"number form fields",
-		"numeric form fields",
-		"number textbox",
-		"numeric textbox"		
+		"number",
+		"numeral",
+		"fields",
+		"input",
+		"form",
+		"textbox"		
 	],
 	"version": "1.0.0",
 	"author": {
