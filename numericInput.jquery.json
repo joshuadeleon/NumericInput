@@ -1,0 +1,40 @@
+{
+	"name": "NumericInput",
+	"title": "NumericInput",
+	"description": "A simple jQuery plug-in which sets an (input) element to only allow numbers.",
+	"keywords": [
+		"numeric",
+		"numeric input",
+		"numeric fields",
+		"number fields",
+		"number input",
+		"number form fields",
+		"numeric form fields",
+		"number textbox",
+		"numeric textbox"		
+	],
+	"version": "1.0.0",
+	"author": {
+		"name": "Joshua De Leon"
+	},
+	"maintainers": [
+		{
+			"name": "Joshua De Leon",
+			"email": "mailbox@transtatic.com",
+			"url": "http://transtatic.com"
+		}
+	],
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/jquery/jquery-color/blob/2.1.2/MIT-LICENSE.txt"
+		}
+	],
+	"homepage": "https://github.com/joshuadeleon/NumericInput",
+	"docs": "https://github.com/joshuadeleon/NumericInput",
+	"download": "http://transtatic.com/js/numericInput.min.js",
+	"demo": "http://transtatic.com/plugin/numericInput.htm",
+	"dependencies": {
+		"jquery": ">=1.5"
+	}
+}
