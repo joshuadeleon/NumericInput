@@ -1,13 +1,19 @@
 NumericInput
 ==============
 
-jQuery plug-in which sets an (input) element to only allow numbers.
+A simple jQuery plug-in which sets an (input) element to only allow numbers.
 
 
 Usage
 --------------
+To create an input element which only accepts positive integers simple use the .numericInput()
+function.
 
-To do.
+`<script>
+	$(function() {
+		$("#elementID").numericInput();
+	});
+</script>`
 
 
 Options
