@@ -10,6 +10,9 @@ allowFloat: (boolean) Allows floating point numbers to be entered. Default: fals
 
 allowNegative: (boolean) Allows negative numbers to be entered. Default: false.
 
+min: (number) The minimum value that can be entered into the textbox, if set to null any number is valid. Default: null
+
+max: (number) The maximum value that can be entered into the textbox, if set to null any number is valid. Default: null
 
 ### Usage ###
 
