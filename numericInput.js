@@ -12,16 +12,21 @@
 	// Plugin defaults
 	var defaults = {
 		allowFloat: false,
-		allowNegative: false
+		allowNegative: false,
+		useCommaInsteadOfDot: false
 	};	
 	
 	// Plugin definition
 	//	allowFloat: (boolean) Allows floating point (real) numbers. If set to false only integers will be allowed. Default: false.
 	//	allowNegative: (boolean) Allows negative values. If set to false only positive number input will be allowed. Default: false.
- 	$.fn.numericInput = function( options ) { 
+	//  useCommaInsteadOfDot: (boolean) Allows , and disallows . to resemble European number notation. To save the input to a database or to make calculations, the comma should be replaced to a dot though. Default: false.
+	$.fn.numericInput = function( options ) { 
 		var settings = $.extend( {}, defaults, options ); 
 		var allowFloat = settings.allowFloat;
 		var allowNegative = settings.allowNegative;
+		var useCommaInsteadOfDot = settings.useCommaInsteadOfDot;
+		
+		var decimalSeparator = (useCommaInsteadOfDot ? 44 : 46);
 		
 		this.keypress(function (event) {
 			var inputCode = event.which;
@@ -29,15 +34,23 @@
 
 			if (inputCode > 0 && (inputCode < 48 || inputCode > 57))	// Checks the if the character code is not a digit
 			{
-				if (allowFloat == true && inputCode == 46)	// Conditions for a period (decimal point)
+				if (allowFloat == true && inputCode == decimalSeparator)	// Conditions for a period (decimal point)
 				{
 					//Disallows a period before a negative
 					if (allowNegative == true && getCaret(this) == 0 && currentValue.charAt(0) == '-') 
 						return false;
 
 					//Disallows more than one decimal point.
-					if (currentValue.match(/[.]/)) 
-						return false; 
+					if (useCommaInsteadOfDot)
+					{
+						if (currentValue.match(/[,]/)) 
+							return false; 
+					}
+					else
+					{
+						if (currentValue.match(/[.]/)) 
+							return false; 
+					}
 				}
 
 				else if (allowNegative == true && inputCode == 45)	// Conditions for a decimal point
