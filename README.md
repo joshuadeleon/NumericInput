@@ -10,6 +10,11 @@ allowFloat: (boolean) Allows floating point numbers to be entered. Default: fals
 
 allowNegative: (boolean) Allows negative numbers to be entered. Default: false.
 
+allowCopy: (boolean) Allows copying the value of the input element. Default: true.
+
+allowPaste: (boolean) Allows pasting into the input element. Default: false.
+
+useCommaInsteadOfDot: (boolean) Allowd , and disallows . to be entered. Default: false.
 
 ### Usage ###
 
@@ -42,4 +47,6 @@ To create an input element which accepts any number (positive or negative floati
 
 	$("#elementID").numericInput({ allowFloat: true, allowNegative: true });
 	
+To allow a comma instead of a dot as decimal separator set the `useCommaInsteadOfDot` option to `true`
 
+	$("#elementID").numericInput({ useCommaInsteadOfDot: true });
