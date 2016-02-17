@@ -2,8 +2,8 @@
 //	Author: Joshua De Leon
 //	File: numericInput.js
 //	Description: Allows only numeric input in an element.
-//	
-//	If you happen upon this code, enjoy it, learn from it, and 
+//
+//	If you happen upon this code, enjoy it, learn from it, and
 //	if possible please credit me: www.transtatic.com
 ///////////////////////////////////////////////////////////////
 
@@ -13,21 +13,25 @@
 	var defaults = {
 		allowFloat: false,
 		allowNegative: false,
+		allowCopy: true,
+		allowPaste: false,
 		useCommaInsteadOfDot: false
-	};	
-	
+	};
+
 	// Plugin definition
 	//	allowFloat: (boolean) Allows floating point (real) numbers. If set to false only integers will be allowed. Default: false.
 	//	allowNegative: (boolean) Allows negative values. If set to false only positive number input will be allowed. Default: false.
 	//  useCommaInsteadOfDot: (boolean) Allows , and disallows . to resemble European number notation. To save the input to a database or to make calculations, the comma should be replaced to a dot though. Default: false.
-	$.fn.numericInput = function( options ) { 
-		var settings = $.extend( {}, defaults, options ); 
+	$.fn.numericInput = function( options ) {
+		var settings = $.extend( {}, defaults, options );
 		var allowFloat = settings.allowFloat;
 		var allowNegative = settings.allowNegative;
+		var allowCopy = settings.allowCopy;
+		var allowPaste = settings.allowPaste;
 		var useCommaInsteadOfDot = settings.useCommaInsteadOfDot;
-		
+
 		var decimalSeparator = (useCommaInsteadOfDot ? 44 : 46);
-		
+
 		this.keypress(function (event) {
 			var inputCode = event.which;
 			var currentValue = $(this).val();
@@ -37,71 +41,90 @@
 				if (allowFloat == true && inputCode == decimalSeparator)	// Conditions for a period (decimal point)
 				{
 					//Disallows a period before a negative
-					if (allowNegative == true && getCaret(this) == 0 && currentValue.charAt(0) == '-') 
+					if (allowNegative == true && getCaret(this) == 0 && currentValue.charAt(0) == '-')
 						return false;
 
 					//Disallows more than one decimal point.
 					if (useCommaInsteadOfDot)
 					{
-						if (currentValue.match(/[,]/)) 
-							return false; 
+						if (currentValue.match(/[,]/))
+							return false;
 					}
 					else
 					{
-						if (currentValue.match(/[.]/)) 
-							return false; 
+						if (currentValue.match(/[.]/))
+							return false;
 					}
 				}
 
 				else if (allowNegative == true && inputCode == 45)	// Conditions for a decimal point
 				{
-					if(currentValue.charAt(0) == '-') 
+					if(currentValue.charAt(0) == '-')
 						return false;
-					
-					if(getCaret(this) != 0) 
-						return false; 
+
+					if(getCaret(this) != 0)
+						return false;
 				}
 
 				else if (inputCode == 8) 	// Allows backspace
-					return true; 
+					return true;
+
+				else if (allowCopy && event.ctrlKey && inputCode == 99) // Allows ctrl-c
+					return true;
+
+				else if (allowPaste && event.ctrlKey && inputCode == 118) // Allows ctrl-v
+					return true;
 
 				else								// Disallow non-numeric
-					return false;  
+					return false;
 			}
 
 			else if(inputCode > 0 && (inputCode >= 48 && inputCode <= 57))	// Disallows numbers before a negative.
 			{
-				if (allowNegative == true && currentValue.charAt(0) == '-' && getCaret(this) == 0) 
+				if (allowNegative == true && currentValue.charAt(0) == '-' && getCaret(this) == 0)
 					return false;
 			}
+
+			else if(inputCode == 0) {
+				// Special codes; allow everything (e.g. Ins/Del/Home/End/PgUp/PgDn or zoom/media buttons), but block Ctrl-Ins (copy) and Shift-Ins (paste) unless they are allowed
+
+				if (event.ctrlKey && event.keyCode == 45 && !allowCopy) // Blocks ctrl-insert (copy)
+					return false;
+
+				else if (event.shiftKey && event.keyCode == 45 && !allowPaste) // Blocks shift-insert (paste)
+					return false;
+
+				else
+					return true;
+			}
 		});
-		
+
 		return this;
 	};
-	
-	
+
+
 	// Private function for selecting cursor position. Makes IE play nice.
 	//	http://stackoverflow.com/questions/263743/how-to-get-caret-position-in-textarea
-	function getCaret(element) 
-	{ 
-		if (element.selectionStart) 
-			return element.selectionStart; 
+	function getCaret(element)
+	{
+		if (element.selectionStart)
+			return element.selectionStart;
 
 		else if (document.selection) //IE specific
-		{ 
-			element.focus(); 
+		{
+			element.focus();
 
-			var r = document.selection.createRange(); 
-			if (r == null) 
-				return 0; 
+			var r = document.selection.createRange();
+			if (r == null)
+				return 0;
 
-			var re = element.createTextRange(), 
-			rc = re.duplicate(); 
-			re.moveToBookmark(r.getBookmark()); 
-			rc.setEndPoint('EndToStart', re); 
-			return rc.text.length; 
-		}  
+			var re = element.createTextRange(),
+			rc = re.duplicate();
+			re.moveToBookmark(r.getBookmark());
+			rc.setEndPoint('EndToStart', re);
+			return rc.text.length;
+		}
 
-		return 0; 
+		return 0;
 	};
 }( jQuery ));

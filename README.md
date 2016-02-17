@@ -10,6 +10,10 @@ allowFloat: (boolean) Allows floating point numbers to be entered. Default: fals
 
 allowNegative: (boolean) Allows negative numbers to be entered. Default: false.
 
+allowCopy: (boolean) Allows copying the value of the input element. Default: true.
+
+allowPaste: (boolean) Allows pasting into the input element. Default: false.
+
 useCommaInsteadOfDot: (boolean) Allowd , and disallows . to be entered. Default: false.
 
 ### Usage ###
