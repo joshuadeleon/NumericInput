@@ -12,16 +12,33 @@
 	// Plugin defaults
 	var defaults = {
 		allowFloat: false,
-		allowNegative: false
+		allowNegative: false,
+		min: undefined,
+		max: undefined
 	};	
 	
 	// Plugin definition
 	//	allowFloat: (boolean) Allows floating point (real) numbers. If set to false only integers will be allowed. Default: false.
 	//	allowNegative: (boolean) Allows negative values. If set to false only positive number input will be allowed. Default: false.
- 	$.fn.numericInput = function( options ) { 
+ 	//	min: (int/float) If set, when the user leaves the input if the entered value is too low it will be set to this value
+	//	max: (int/float) If set, when the user leaves the input if the entered value is too high it will be set to this value
+	$.fn.numericInput = function( options ) { 
 		var settings = $.extend( {}, defaults, options ); 
 		var allowFloat = settings.allowFloat;
 		var allowNegative = settings.allowNegative;
+		var min = settings.min;
+		var max = settings.max;
+		
+		if(min == max)
+		{
+			throw("The minimum value cannot be the same as the max value");
+		}
+		else if(min > max) //If the values are swapped we swap them back
+		{
+			var temp = min;
+			min = max;
+			max = temp;
+		}
 		
 		this.keypress(function (event) {
 			var inputCode = event.which;
@@ -60,6 +77,31 @@
 			{
 				if (allowNegative == true && currentValue.charAt(0) == '-' && getCaret(this) == 0) 
 					return false;
+			}
+		});
+		
+		
+		this.blur(function (event) {
+			//Get and store the current value
+			var currentValue = $(this).val();
+			
+			//If the value isn't empty
+			if(currentValue.length > 0)
+			{
+				//Get the float value, even if we're not using floats this will be ok
+				var floatValue = parseFloat(currentValue);
+				
+				//If min is specified and the value is less set the value to min
+				if(min !== undefined && floatValue < min)
+				{
+					$(this).val(min);
+				}
+				
+				//If max is specified and the value is less set the value to max
+				if(max !== undefined && floatValue > max)
+				{
+					$(this).val(max);
+				}
 			}
 		});
 		
