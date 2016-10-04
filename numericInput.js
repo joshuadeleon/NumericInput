@@ -49,7 +49,7 @@
 						return false; 
 				}
 
-				else if (inputCode == 8) 	// Allows backspace
+				else if (inputCode == 8 || inputCode == 67 || inputCode == 86) 	// Allows backspace , ctrl+c ,ctrl+v (copy & paste)
 					return true; 
 
 				else								// Disallow non-numeric
