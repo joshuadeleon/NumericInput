@@ -29,7 +29,7 @@
 		var min = settings.min;
 		var max = settings.max;
 		
-		if(min == max)
+		if(min !== undefined && max !== undefined && min == max)
 		{
 			throw("The minimum value cannot be the same as the max value");
 		}
