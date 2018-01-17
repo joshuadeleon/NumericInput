@@ -59,7 +59,7 @@
 
 				else if (allowNegative == true && inputCode == 45)	// Conditions for a decimal point
 				{
-					if(currentValue.charAt(0) == '-') 
+					if(currentValue.charAt(0) == '-' && getSelectEnd(this) == 0) 
 						return false;
 					
 					if(getCaret(this) != 0) 
@@ -75,7 +75,7 @@
 
 			else if(inputCode > 0 && (inputCode >= 48 && inputCode <= 57))	// Disallows numbers before a negative.
 			{
-				if (allowNegative == true && currentValue.charAt(0) == '-' && getCaret(this) == 0) 
+				if (allowNegative == true && currentValue.charAt(0) == '-' && getCaret(this) == 0 && getSelectEnd(this) == 0) 
 					return false;
 			}
 		});
@@ -133,4 +133,12 @@
 
 		return 0; 
 	};
+        
+        function getSelectEnd(element) 
+        {
+                if (element.selectionEnd)
+                        return element.selectionEnd;
+                else
+                    return 0;
+        }
 }( jQuery ));
