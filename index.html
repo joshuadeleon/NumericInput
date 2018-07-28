@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Using Numeric Input Plugin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+
+  <label>Integer values</label><input type="text" name="integer" />
+  <label>Positive integer values</label><input type="text" name="integer" />
+
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="numericInput.js"></script>
+<script type="text/javascript">
+
+  $('input').numericInput({
+    min: 1,
+    max: 100,
+    allowFloat: true
+  });
+
+</script>
+</body>
+</html>
