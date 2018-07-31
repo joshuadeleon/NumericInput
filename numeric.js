@@ -1,21 +1,24 @@
 ///////////////////////////////////////////////////////////////
-//  Original Author: Joshua De Leon
-//  Modified By: Vivek Shrinivasan
-//  File: numericInput.js
+//  Author: Vivek Shrinivasan
+//  File: numeric.js
 //  Description: Allows only numeric input in an element.
 //  
-//  If you happen upon this code, enjoy it, learn from it, and 
-//  if possible please credit me: www.transtatic.com
+//  Inspired by Joshua De Leon's code 
+//   https://github.com/joshuadeleon/NumericInput
 ///////////////////////////////////////////////////////////////
 
 //  Sets a keypress event for the selected element allowing only numbers. Typically this would only be bound to a textbox.
 (function($) {
   // Plugin defaults
   var defaults = {
-    min: 0,
+    min: -1,
     max: 1
   };
   var ascii_digits = [48, 57];
+  var ascii_dot = 189;   // .
+  var ascii_neg = 190;   // -
+  var pattern = /^-?\d+\.?\d+$/;
+  var non_numeric = /[^0-9-.]+/;
 
   // Plugin definition
   //  min: (int/float) If set, when the user leaves the input if the entered value is too low it will be set to this value
@@ -25,9 +28,6 @@
     var settings = $.extend({}, defaults, options);
     var min = settings.min;
     var max = settings.max;
-    var ascii_digits = [47, 58];
-    var pattern = /^-?\d+\.?\d+$/;
-    var non_numeric = /[^0-9-.]+/;
 
     if(min == max) {
       throw ('The minimum value cannot be the same as the max value');
@@ -47,7 +47,7 @@
       var val = $(this).val();
       if(
         (input_code < ascii_digits[0] || input_code > ascii_digits[1]) &&
-        (input_code != 189 && input_code != 190)
+        (input_code != ascii_dot && input_code != ascii_neg)
       ) {
         // remove chars which aren't numbers `0-9` or `-` or a `.`
         $(this).val(val.replace(non_numeric, ''));
