@@ -1,48 +1,34 @@
-NumericInput
-==============
+# NumericInput
 
-A simple jQuery plug-in which sets an (input) element to only allow numbers.
+
+A simple jQuery plug-in which sets an (input) element to only allow numbers and floating points.
 
 
 ### Options ###
 
-allowFloat: (boolean) Allows floating point numbers to be entered. Default: false.
+`min`: The minimum value that can be entered into the textbox, if set to null any number is valid. Default: -1
 
-allowNegative: (boolean) Allows negative numbers to be entered. Default: false.
-
-min: (number) The minimum value that can be entered into the textbox, if set to null any number is valid. Default: null
-
-max: (number) The maximum value that can be entered into the textbox, if set to null any number is valid. Default: null
+`max`: The maximum value that can be entered into the textbox, if set to null any number is valid. Default: 1
 
 ### Usage ###
 
 Given the following input element
-    `<input id="elementID" type="text" />`
 
-To create an input element which only accepts positive integers simple use the .numericInput()
-function.
+```html
+<input id="elementID" type="text" />
+```
 
-    <script type="text/javascript" src="../numericInput.min.js"></script>
-    <script>
-		$(function() {
-			$("#elementID").numericInput();
-		});
-    </script>
+To create an input element which only accepts positive integers simple use the `.numeric` function like
 
-
-To create an input element which accepts positive or negative integer set the `allowNegative` option
-to `true`
-
-    $("#elementID").numericInput({ allowNegative: true });
-	 
-To create an input element which accepts positive numbers (floating point) set the `allowFloat` option to 
-`true`
-
-    $("#elementID").numericInput({ allowFloat: true });
-	 
-To create an input element which accepts any number (positive or negative floating point) set both 
-`allowFloat` and `allowNegative` to `true`
-
-	$("#elementID").numericInput({ allowFloat: true, allowNegative: true });
-	
+```html
+<script type="text/javascript" src="numeric.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("#elementID").numeric({
+      min: -100,
+      max: 100
+    });
+  });
+</script>
+```
 
