@@ -20,7 +20,7 @@
   // Plugin definition
   //  min: (int/float) If set, when the user leaves the input if the entered value is too low it will be set to this value
   //  max: (int/float) If set, when the user leaves the input if the entered value is too high it will be set to this value
-  $.fn.numericInput = function(options) {
+  $.fn.numeric = function(options) {
     var $this = this;
     var settings = $.extend({}, defaults, options);
     var min = settings.min;
@@ -38,20 +38,19 @@
     }
 
     // beautify the input type
-    $this.addClass('numericInput');
+    $this.addClass('numeric');
 
     // attach an event of `keyup` on the element
     //  after the input has been inputted in the textbox
     $this.on('keyup', function(event) {
-      var inputCode = event.which;
-      var currentValue = $(this).val();
-
+      var input_code = event.which;
+      var val = $(this).val();
       if(
-        (inputCode < ascii_digits[0] || inputCode > ascii_digits[1]) &&
-        (inputCode != 189 && inputCode != 190)
+        (input_code < ascii_digits[0] || input_code > ascii_digits[1]) &&
+        (input_code != 189 && input_code != 190)
       ) {
         // remove chars which aren't numbers `0-9` or `-` or a `.`
-        $(this).val(currentValue.replace(non_numeric, ''));
+        $(this).val(val.replace(non_numeric, ''));
       }
       return true;
     });

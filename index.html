@@ -4,7 +4,7 @@
   <title>Using Numeric Input Plugin</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" type="text/css" href="numericInput.css">
+  <link rel="stylesheet" type="text/css" href="numeric.css">
 </head>
 <body>
 
@@ -14,11 +14,11 @@
   <label>(type=number) Positive integer values</label><input type="number" name="integer" /><br />
 
 <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="numericInput.js"></script>
+<script type="text/javascript" src="numeric.js"></script>
 <script type="text/javascript">
 
   // by definition - should be applied only to text types
-  $('input[type=text], input[type=number]').numericInput({
+  $('input[type=text], input[type=number]').numeric({
     min: -1,
     max: 100,
     allowFloat: true
