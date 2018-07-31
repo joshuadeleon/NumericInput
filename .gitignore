@@ -1,0 +1,63 @@
+# Ignore all files that generally ought not to be committed into the repo.
+# Never commit sensitive data.
+# Never commit useless files.
+# Try not to commit large files.
+
+# Filenames should NOT have spaces
+* *
+
+# Ignore byte-compiled / optimised / DLL files
+*.py[cod]
+
+# Ignore log files
+logs/
+
+# Cache folders created by Gramex
+.cache/
+
+# Old vis.py used to produce xhtml output. Ignore these
+*.xhtml
+
+# Data files. Try not to commit data into the repo
+*.csv
+*.dat
+*.mdb
+
+# Zip files that aren't read by Pandas
+*.7z
+*.zip
+
+# Documents
+*.doc*
+*.pdf
+*.ppt*
+*.xls*
+
+# Avoid media files
+*.avi
+*.mp*
+*.wmv
+
+# Backup files
+~$*
+*~
+*.bak*
+
+# Sublime-text workspaces, etc
+*.sublime-*
+
+# Typically bash.exe.stackdump on Cygwin
+*.stackdump
+
+# Ignore bower components and npm modules
+node_modules/
+bower_components/
+
+# Windows shortcut files
+*.lnk
+
+# Windows / Mac OS junk files
+Desktop.ini
+$RECYCLE.BIN/
+*[Tt]humbs.db
+*.DS_Store

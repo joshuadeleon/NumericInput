@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Using Numeric Input Plugin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="numeric.css">
+</head>
+<body>
+
+  <label>(type=text) Integer values</label><input type="text" name="integer" /><br />
+  <label>(type=text) Positive integer values</label><input type="text" name="integer" /><br />
+  <label>(type=password) Positive integer values</label><input type="password" name="integer" /><br />
+  <label>(type=number) Positive integer values</label><input type="number" name="integer" /><br />
+
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="numeric.js"></script>
+<script type="text/javascript">
+
+  // by definition - should be applied only to text types
+  $('input[type=text], input[type=number]').numeric({
+    min: -1,
+    max: 100,
+    allowFloat: true
+  });
+
+</script>
+</body>
+</html>
