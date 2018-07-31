@@ -12,27 +12,22 @@
 (function($) {
   // Plugin defaults
   var defaults = {
-    allowFloat: false,
-    allowNegative: false,
     min: 0,
     max: 1
   };
   var ascii_digits = [48, 57];
 
   // Plugin definition
-  //  allowFloat: (boolean) Allows floating point (real) numbers. If set to false only integers will be allowed. Default: false.
-  //  allowNegative: (boolean) Allows negative values. If set to false only positive number input will be allowed. Default: false.
   //  min: (int/float) If set, when the user leaves the input if the entered value is too low it will be set to this value
   //  max: (int/float) If set, when the user leaves the input if the entered value is too high it will be set to this value
   $.fn.numericInput = function(options) {
     var $this = this;
     var settings = $.extend({}, defaults, options);
-    var allowFloat = settings.allowFloat;
-    var allowNegative = settings.allowNegative;
     var min = settings.min;
     var max = settings.max;
     var ascii_digits = [47, 58];
     var pattern = /^-?\d+\.?\d+$/;
+    var non_numeric = /[^0-9-.]+/;
 
     if(min == max) {
       throw ('The minimum value cannot be the same as the max value');
@@ -43,43 +38,22 @@
     }
 
     // beautify the input type
-    // add a class
     $this.addClass('numericInput');
 
     // attach an event of `keyup` on the element
     //  after the input has been inputted in the textbox
     $this.on('keyup', function(event) {
       var inputCode = event.which;
-      var currentValue = $($this).val();
+      var currentValue = $(this).val();
 
-      if(inputCode > 0 && (inputCode < ascii_digits[0] || inputCode > ascii_digits[1])) {
-        // Checks the if the character code is not a digit
-        if(allowFloat == true && inputCode == 46) {
-          // Conditions for a period (decimal point)
-          //Disallows a period before a negative
-          if(allowNegative == true && getCaret($this) == 0 && currentValue.charAt(0) == '-')
-            return false;
-
-          //Disallows more than one decimal point.
-          if(currentValue.match(/[.]/))
-            return false;
-        } else if(allowNegative == true && inputCode == 45) { // Conditions for a decimal point
-          if(currentValue.charAt(0) == '-')
-            return false;
-
-          if(getCaret($this) != 0)
-            return false;
-        } else if(inputCode == 8 || inputCode == 67 || inputCode == 86) {
-          // Allows backspace , ctrl+c ,ctrl+v (copy & paste)
-          return true;
-        } else {
-          // Disallow non-numeric
-          return false;
-        }
-      } else if(inputCode > 0 && (inputCode >= ascii_digits[0] && inputCode <= ascii_digits[1])) { // Disallows numbers before a negative.
-        if(allowNegative == true && currentValue.charAt(0) == '-' && getCaret($this) == 0)
-          return false;
+      if(
+        (inputCode < ascii_digits[0] || inputCode > ascii_digits[1]) &&
+        (inputCode != 189 && inputCode != 190)
+      ) {
+        // remove chars which aren't numbers `0-9` or `-` or a `.`
+        $(this).val(currentValue.replace(non_numeric, ''));
       }
+      return true;
     });
 
     // attach `blur` event
@@ -96,26 +70,4 @@
     return $this;
   };
 
-  // Private function for selecting cursor position. Makes IE play nice.
-  //  http://stackoverflow.com/questions/263743/how-to-get-caret-position-in-textarea
-  function getCaret(element) {
-    if(element.selectionStart)
-      return element.selectionStart;
-
-    else if(document.selection) { //IE specific
-      element.focus();
-
-      var r = document.selection.createRange();
-      if(r == null)
-        return 0;
-
-      var re = element.createTextRange(),
-        rc = re.duplicate();
-      re.moveToBookmark(r.getBookmark());
-      rc.setEndPoint('EndToStart', re);
-      return rc.text.length;
-    }
-
-    return 0;
-  };
 }(jQuery));
