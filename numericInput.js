@@ -31,6 +31,7 @@
     var allowNegative = settings.allowNegative;
     var min = settings.min;
     var max = settings.max;
+    var ascii_digits = [47, 58];
     var pattern = /^-?\d+\.?\d+$/;
 
     if(min == max) {
@@ -45,8 +46,9 @@
     // add a class
     $this.addClass('numericInput');
 
-    // attach an event of `keypress` on the element
-    $this.on('keypress', function(event) {
+    // attach an event of `keyup` on the element
+    //  after the input has been inputted in the textbox
+    $this.on('keyup', function(event) {
       var inputCode = event.which;
       var currentValue = $($this).val();
 
@@ -80,7 +82,7 @@
       }
     });
 
-    // attach `blur` even
+    // attach `blur` event
     $this.on('blur', function(event) {
       var val = $(this).val();
       var change = min;
