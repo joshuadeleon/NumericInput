@@ -1,0 +1,32 @@
+{
+  "name": "jqp_numeric_plugin",
+  "version": "1.0.0",
+  "description": "A simple jQuery plug-in which sets an (input) element to only allow numbers and floating points.",
+  "main": "numeric.js",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {
+    "jquery": "^3.3.1"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaizer1v/NumericInput.git"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "numeric",
+    "html",
+    "input"
+  ],
+  "author": "vivek shrinivasan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaizer1v/NumericInput/issues"
+  },
+  "homepage": "https://github.com/kaizer1v/NumericInput#readme"
+}
